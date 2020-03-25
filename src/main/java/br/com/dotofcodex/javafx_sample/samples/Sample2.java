@@ -17,6 +17,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -91,6 +92,12 @@ public class Sample2 extends Application {
 		});
 		grid.add(password, 1, 2);
 
+		CheckBox rememberMe = new CheckBox("Remember E-mail?");
+		HBox rememberBox = new HBox(10);
+		rememberBox.setAlignment(Pos.BOTTOM_LEFT);
+		rememberBox.getChildren().add(rememberMe);
+		grid.add(rememberBox, 1, 3);
+		
 		Button login = new Button("Sign in");
 		login.setDefaultButton(true);
 		login.setOnAction((ActionEvent event) -> {
@@ -115,10 +122,15 @@ public class Sample2 extends Application {
 			}
 
 			if (user.equals("pedro@gmail.com") && pass.equals("123")) {
+				String message = "Logged in with success.";
+				if (rememberMe.isSelected()) {
+					message = message.concat("\nRemember me active.");
+				}
+				
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Info Dialog");
 				alert.setHeaderText("Hello, Pedro");
-				alert.setContentText("Logged in with success!!!");
+				alert.setContentText(message);
 				alert.showAndWait();
 			} else {
 				Alert alert = new Alert(AlertType.INFORMATION);
