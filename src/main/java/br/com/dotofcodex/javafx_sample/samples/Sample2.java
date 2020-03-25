@@ -63,7 +63,8 @@ public class Sample2 extends Application {
 		grid.setVgap(10);
 		grid.setPadding(new Insets(25, 25, 25, 25));
 
-		Scene scene = new Scene(grid, 500, 180);
+		Scene scene = new Scene(grid, 500, 200);
+		scene.getStylesheets().add(Sample2.class.getResource("/login.css").toExternalForm());
 		stage.setScene(scene);
 
 		Text status = new Text();
@@ -86,7 +87,11 @@ public class Sample2 extends Application {
 				}
 			}
 		});
-		username.setText(lastUsername);
+
+		if (lastUsername != null && !lastUsername.isEmpty()) {
+			username.setText(lastUsername);			
+		}
+		
 		grid.add(username, 1, 1);
 
 		Label label2 = new Label("Password: ");
@@ -132,16 +137,16 @@ public class Sample2 extends Application {
 			String user = username.getText();
 			String pass = password.getText();
 
-			if (user.isEmpty()) {
+			if (user != null && user.isEmpty()) {
 				isEmpty = true;
 				status.setVisible(true);
-				username.setStyle("-fx-text-box-border: red; -focus-color: red;");
+				username.setStyle("-fx-text-box-border: red; -fx-focus-color: red;");
 			}
 
-			if (pass.isEmpty()) {
+			if (pass != null && pass.isEmpty()) {
 				isEmpty = true;
 				status.setVisible(true);
-				password.setStyle("-fx-text-box-border: red; -focus-color: red;");
+				password.setStyle("-fx-text-box-border: red; -fx-focus-color: red;");
 			}
 
 			if (isEmpty) {
